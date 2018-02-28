@@ -1,5 +1,6 @@
 package trial;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,8 +20,8 @@ public class Main {
 2 - O
  */
         int[][] numbers = {
-                {0, 1, 1},
-                {1, 1, 0},
+                {0, 0, 1},
+                {1, 0, 0},
                 {1, 1, 1},
 
         };
@@ -36,7 +37,7 @@ public class Main {
             System.out.print("Matrix of x and y: ");
             matrix1 = sc.nextInt();
             matrix2 = sc.nextInt();
-            numbers[matrix1][matrix2] = 1; // XorO, X=1,O=1
+            numbers[matrix1][matrix2] = 1; // XorO, X=1,O=2
 
             isWin = isWin(numbers,matrix1,matrix2);
             isTableFull = isTableFull(numbers);
@@ -93,7 +94,6 @@ public class Main {
     }
 
     static void drawTable(int row, int col, int[][] elhelyezes, String XorY) {
-        //TODO
         for (int i = 0; i <= row; i++) {
             for (int j = 0; j <= col; j++) {
                 System.out.println("+---");
