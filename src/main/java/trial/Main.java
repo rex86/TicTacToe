@@ -111,7 +111,7 @@ public class Main {
         System.out.println(countDotInRow(numbers, 2, 1));
         System.out.println(countDotInRow(numbers, 2, 2));
 */
-        //System.out.println("############countDotIncolumn############");
+        System.out.println("############countDotIncolumn############");
 
         System.out.println(countDotIncolumn(numbers,0,2));
 
