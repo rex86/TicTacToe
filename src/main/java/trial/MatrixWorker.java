@@ -19,7 +19,6 @@ public class MatrixWorker {
     //############ GETTER ###########
     public int getCellValue(){
         int rentunValue;
-        //TODO add if because of bad index
         //WHAT I see, in this case i have to decrease
         return ticTacToeMatrix[this.row][this.column];
     }

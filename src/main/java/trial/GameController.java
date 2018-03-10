@@ -36,7 +36,8 @@ public class GameController {
         counterPlayer1 = new Counter(matrixWorker, player1);
         counterPlayer2 = new Counter(matrixWorker, player2);
         Table table = new Table(matrixWorker);
-
+        int player1NumberInMatrix = player1.getPiece().equals("X")?1:2;
+        int player2NumberInMatrix = player2.getPiece().equals("X")?1:2;
         Scanner sc = new Scanner(System.in);
         int matrix1, matrix2;
         int flag = 0;
@@ -51,16 +52,14 @@ public class GameController {
                 matrix1 = sc.nextInt();
                 matrix2 = sc.nextInt();
                 matrixWorker.setPosition(matrix1, matrix2);
-                System.out.println(matrixWorker);
-                matrixWorker.setCellValue(1);
-                //numbers[matrix1][matrix2] = 1; // XorO, X=1,O=2
+                matrixWorker.setCellValue(player1NumberInMatrix); // XorO, X=1,O=2
                 flag = 1;
             } else {
                 System.out.print(player2.getName() + " row: column: ");
                 matrix1 = sc.nextInt();
                 matrix2 = sc.nextInt();
                 matrixWorker.setPosition(matrix1, matrix2);
-                matrixWorker.setCellValue(2);
+                matrixWorker.setCellValue(player2NumberInMatrix); // XorO, X=1,O=2
 
                 flag = 0;
             }
@@ -82,73 +81,6 @@ public class GameController {
             System.out.println("End of Game");
         }
 
-
-
-
-        /*
-        matrixWorker.setPosition(1,1);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(1,2);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(2,2);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(2,3);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(3,1);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(3,2);
-        System.out.println(counter.count("row"));
-        matrixWorker.setPosition(3,3);
-        System.out.println(counter.count("row"));
-*/
-/*
-        matrixWorker.setPosition(1,1);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(1,2);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(2,2);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(2,3);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(3,1);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(3,2);
-        System.out.println(counter.count("column"));
-        matrixWorker.setPosition(3,3);
-        System.out.println(counter.count("column"));
-*/
-        /*
-        matrixWorker.setPosition(1,1);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(1,2);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(2,2);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(2,3);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(3,1);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(3,2);
-        System.out.println(counter.count("diagonalUp"));
-        matrixWorker.setPosition(3,3);
-        System.out.println(counter.count("diagonalUp"));
-*/
-/*
-        matrixWorker.setPosition(1,1);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(1,2);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(2,2);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(2,3);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(3,1);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(3,2);
-        System.out.println(counter.count("diagonalDown"));
-        matrixWorker.setPosition(3,3);
-        System.out.println(counter.count("diagonalDown"));
-        */
     }
     static boolean isWin(Counter counter) {
 

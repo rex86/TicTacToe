@@ -1,6 +1,5 @@
-package trial;
+package oldTest;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
