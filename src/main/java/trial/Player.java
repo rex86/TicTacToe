@@ -7,4 +7,12 @@ public class Player {
         this.name = name;
         this.piece = piece;
     }
+
+    public String getPiece() {
+        return piece;
+    }
+
+    public void setPiece(String piece) {
+        this.piece = piece;
+    }
 }

@@ -108,14 +108,42 @@ public class MatrixWorker {
         return (this.freeCellNumber > 0)?true:false;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
     public boolean hasNextStep(String direction){
         boolean value = false;
         switch (direction){
-            case "upDown":
-                value = row != 0 && row != ticTacToeMatrix.length - 1;
+            case "up":
+                value = row >= 0;
                 break;
-            case "leftRight":
-                value = column != 0 && column != ticTacToeMatrix[0].length - 1;
+            case "down":
+                value = row < ticTacToeMatrix.length;
+                break;
+            case "left":
+                value = column >= 0;
+                break;
+            case "right":
+                value = column < ticTacToeMatrix[0].length;
+                break;
+            case "rightUp":
+                value = hasNextStep("right") && hasNextStep("up");
+                break;
+            case "leftDown":
+                value = hasNextStep("left") && hasNextStep("down");
+                break;
+            case "rightDown":
+                value = hasNextStep("right") && hasNextStep("down");
+                break;
+            case "leftUp":
+                value = hasNextStep("left") && hasNextStep("up");
+                break;
+
         }
         return value;
 
