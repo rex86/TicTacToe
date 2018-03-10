@@ -64,7 +64,7 @@ public class Main {
             System.out.println(isTableFull);
 
         }*/
-        //writeAChar(numbers);
+        writeAChar(numbers);
         //isWin(numbers,1,2);
         //System.out.println("End of Game");
 
@@ -111,10 +111,6 @@ public class Main {
         System.out.println(countDotInRow(numbers, 2, 1));
         System.out.println(countDotInRow(numbers, 2, 2));
 */
-        System.out.println("############countDotIncolumn############");
-
-        System.out.println(countDotIncolumn(numbers,0,2));
-
 
     }
 
@@ -280,7 +276,7 @@ public class Main {
     }
 
     //átló1
-    public static int countDotInDiagonalUp(int[][] workArray, int startX, int startY) {
+    public static int countDotInDiagonalUp(int[][] workArray, int startX, int startY)   {
 
         int numberOfDot = 0, pattern, getValueInArray;
         pattern = 1;
