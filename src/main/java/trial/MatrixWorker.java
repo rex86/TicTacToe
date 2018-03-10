@@ -33,6 +33,7 @@ public class MatrixWorker {
     //############## SETTER #########
     public void setCellValue(int value){
         //WHAT I see, in this case i have to decrease
+        System.out.println(row+" : "+column);
         ticTacToeMatrix[row][column] = value;
         freeCellNumber--;
     }

@@ -15,7 +15,8 @@ public class Counter {
     }
 
     public int count(String direction){
-        //TODO add more direction, diagonal
+        int row = matrixWorker.getRow();
+        int column = matrixWorker.getColumn();
         int numberOfDot=0;
         switch (direction){
             case "row":
@@ -32,6 +33,7 @@ public class Counter {
                 break;
 
         }
+        matrixWorker.setPosition(row + 1,column + 1);
         return numberOfDot;
     }
 

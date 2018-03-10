@@ -3,7 +3,7 @@ package trial;
 import java.util.Scanner;
 
 public class GameController {
-    static Counter counter = null;
+    static Counter counterPlayer1,counterPlayer2 = null;
 
     public static void main(String[] args) {
         runGame();
@@ -32,27 +32,31 @@ public class GameController {
 
         MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
         Player player1 = new Player("Rex", "X");
-        counter = new Counter(matrixWorker, player1);
+        Player player2 = new Player("Moni", "O");
+        counterPlayer1 = new Counter(matrixWorker, player1);
+        counterPlayer2 = new Counter(matrixWorker, player2);
         Table table = new Table(matrixWorker);
 
         Scanner sc = new Scanner(System.in);
         int matrix1, matrix2;
         int flag = 0;
         boolean win = false;
+        String winnerName = "";
         while (matrixWorker.freeCellNumber > 0 && !win) {
 
             table.drawTable();
 
             if (flag == 0) {
-                System.out.print("Player 1, matrix of x and y: ");
+                System.out.print(player1.getName() + " row: column: ");
                 matrix1 = sc.nextInt();
                 matrix2 = sc.nextInt();
                 matrixWorker.setPosition(matrix1, matrix2);
+                System.out.println(matrixWorker);
                 matrixWorker.setCellValue(1);
                 //numbers[matrix1][matrix2] = 1; // XorO, X=1,O=2
                 flag = 1;
             } else {
-                System.out.print("Player 2, matrix of x and y: ");
+                System.out.print(player2.getName() + " row: column: ");
                 matrix1 = sc.nextInt();
                 matrix2 = sc.nextInt();
                 matrixWorker.setPosition(matrix1, matrix2);
@@ -60,11 +64,24 @@ public class GameController {
 
                 flag = 0;
             }
-
-            win = isWin();
+            win = isWin(counterPlayer1) || isWin(counterPlayer2);
+            if(win && flag == 0){
+                winnerName = player2.getName();
+            }else if(win && flag == 1){
+                winnerName = player1.getName();
+            }
         }
+
         table.drawTable();
-        System.out.println("End of Game");
+
+        if(winnerName.isEmpty()){
+            System.out.println("Nobody won because there is no empty cell");
+            System.out.println("End of Game");
+        }else {
+            System.out.println(winnerName + " is won");
+            System.out.println("End of Game");
+        }
+
 
 
 
@@ -84,7 +101,7 @@ public class GameController {
         matrixWorker.setPosition(3,3);
         System.out.println(counter.count("row"));
 */
-        /*
+/*
         matrixWorker.setPosition(1,1);
         System.out.println(counter.count("column"));
         matrixWorker.setPosition(1,2);
@@ -133,11 +150,12 @@ public class GameController {
         System.out.println(counter.count("diagonalDown"));
         */
     }
-    static boolean isWin() {
-        return counter.count("row") == 3 ||
-                counter.count("column") == 3 ||
-                counter.count("diagonalUp") == 3 ||
-                counter.count("diagonalDown") == 3;
+    static boolean isWin(Counter counter) {
+
+        return  counter.count("row") >= 3 ||
+                counter.count("column") >= 3 ||
+                counter.count("diagonalUp") >= 3 ||
+                counter.count("diagonalDown") >= 3;
     }
 }
 
