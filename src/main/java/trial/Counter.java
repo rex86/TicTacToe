@@ -15,6 +15,7 @@ public class Counter {
     }
 
     public int count(String direction){
+        //save the original position
         int row = matrixWorker.getRow();
         int column = matrixWorker.getColumn();
         int numberOfDot=0;
@@ -33,6 +34,7 @@ public class Counter {
                 break;
 
         }
+        //We have to go to the original position
         matrixWorker.setPosition(row + 1,column + 1);
         return numberOfDot;
     }

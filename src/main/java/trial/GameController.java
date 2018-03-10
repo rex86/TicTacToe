@@ -69,6 +69,7 @@ public class GameController {
             }else if(win && flag == 1){
                 winnerName = player1.getName();
             }
+            System.out.println();
         }
 
         table.drawTable();
