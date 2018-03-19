@@ -1,5 +1,7 @@
 package gui;
 
+import trial.MatrixWorker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,6 +11,8 @@ public class GuiTable extends JFrame implements MouseListener{
 
     Container cp = getContentPane();
     JLabel [][] jLabels = new JLabel[3][3];
+    final Color emptyColor = Color.BLACK;
+    MatrixWorker matrixWorker;
 
     public GuiTable(){
         initGui();
@@ -21,6 +25,18 @@ public class GuiTable extends JFrame implements MouseListener{
         setPreferredSize(new Dimension(300,200));
         JPanel tablePanel = new JPanel(new GridLayout(3,3));
         tablePanel.setBackground(Color.WHITE);
+
+
+        int[][] ticTacToeMatrix = {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0},
+
+        };
+        matrixWorker = new MatrixWorker(ticTacToeMatrix);
+
+
+
         JLabel jLabel1 = new JLabel("Teszt1");
         jLabel1.setBackground(Color.RED);
         jLabel1.setOpaque(true);
@@ -34,7 +50,7 @@ public class GuiTable extends JFrame implements MouseListener{
         JLabel jLabel6 = new JLabel("Teszt 6");
         JLabel jLabel7 = new JLabel("Teszt 7");
         JLabel jLabel8 = new JLabel("Teszt 8");
-        JLabel jLabel9 = new JLabel("Teszt 9");
+        JLabel jLabel9 = new JLabel();
         jLabel1.setName("Valami");
 
         jLabel2.setOpaque(true);
@@ -81,8 +97,12 @@ public class GuiTable extends JFrame implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getComponent().getName());
-        e.getComponent().setBackground(Color.BLACK);
+        if(e.getComponent().getBackground() != Color.BLACK){
+
+            System.out.println(e.getComponent().getName());
+            e.getComponent().setBackground(emptyColor);
+        }
+
 
 
     }
