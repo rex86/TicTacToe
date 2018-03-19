@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 public class GuiTable extends JFrame implements MouseListener{
 
     Container cp = getContentPane();
+    JLabel [][] jLabels = new JLabel[3][3];
+
     public GuiTable(){
         initGui();
     }
@@ -23,7 +25,7 @@ public class GuiTable extends JFrame implements MouseListener{
         jLabel1.setBackground(Color.RED);
         jLabel1.setOpaque(true);
 
-        jLabel1.setSize(5,5);
+        //jLabel1.setSize(5,5);
 
         JLabel jLabel2 = new JLabel("Teszt 2");
         JLabel jLabel3 = new JLabel("Teszt 3");
@@ -33,6 +35,7 @@ public class GuiTable extends JFrame implements MouseListener{
         JLabel jLabel7 = new JLabel("Teszt 7");
         JLabel jLabel8 = new JLabel("Teszt 8");
         JLabel jLabel9 = new JLabel("Teszt 9");
+        jLabel1.setName("Valami");
 
         jLabel2.setOpaque(true);
         jLabel3.setOpaque(true);
@@ -78,8 +81,9 @@ public class GuiTable extends JFrame implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getSource());
+        System.out.println(e.getComponent().getName());
         e.getComponent().setBackground(Color.BLACK);
+
 
     }
 
