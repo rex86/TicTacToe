@@ -1,11 +1,22 @@
 package trial;
 
+import gui.GuiTable;
+
 import java.util.Scanner;
 
 public class GameController {
     static Counter counterPlayer1,counterPlayer2 = null;
+    static int matrix1=1, matrix2=1;
 
-    public static void main(String[] args) {
+    public void setMatrix1(int matrix1) {
+        this.matrix1 = matrix1;
+    }
+
+    public void setMatrix2(int matrix2) {
+        this.matrix2 = matrix2;
+    }
+
+   public static void main(String[] args) {
         runGame();
     }
 
@@ -39,10 +50,36 @@ public class GameController {
         int player1NumberInMatrix = player1.getPiece().equals("X")?1:2;
         int player2NumberInMatrix = player2.getPiece().equals("X")?1:2;
         Scanner sc = new Scanner(System.in);
-        int matrix1, matrix2;
+        GuiTable guiTable = new GuiTable();
+
         int flag = 0;
         boolean win = false;
         String winnerName = "";
+        System.out.println("MATRIX1: " + matrix1);
+        System.out.println("MATRIX2: " + matrix2);
+
+        if (flag == 0) {
+            System.out.print(player1.getName() + " row: column: ");
+
+            matrixWorker.setPosition(matrix1, matrix2);
+            matrixWorker.setCellValue(player1NumberInMatrix); // XorO, X=1,O=2
+            flag = 1;
+        } else {
+            System.out.print(player2.getName() + " row: column: ");
+
+            matrixWorker.setPosition(matrix1, matrix2);
+            matrixWorker.setCellValue(player2NumberInMatrix); // XorO, X=1,O=2
+
+            flag = 0;
+        }
+        win = isWin(counterPlayer1) || isWin(counterPlayer2);
+        if(win && flag == 0){
+            winnerName = player2.getName();
+        }else if(win && flag == 1){
+            winnerName = player1.getName();
+        }
+        //#### CONSOLE GAME
+        /*
         while (matrixWorker.freeCellNumber > 0 && !win) {
 
             table.drawTable();
@@ -81,7 +118,7 @@ public class GameController {
             System.out.println(winnerName + " is won");
             System.out.println("End of Game");
         }
-
+*/
     }
     static boolean isWin(Counter counter) {
 

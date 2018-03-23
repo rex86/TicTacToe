@@ -1,11 +1,13 @@
 package gui;
 
-import trial.MatrixWorker;
+import trial.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Scanner;
 
 public class GuiTable extends JFrame implements MouseListener{
 
@@ -14,6 +16,7 @@ public class GuiTable extends JFrame implements MouseListener{
     final Color emptyColor = Color.WHITE;
     final Color testColor = Color.RED;
     MatrixWorker matrixWorker;
+    GameController gameController = new GameController();
 
     public GuiTable(){
         initGui();
@@ -43,22 +46,31 @@ public class GuiTable extends JFrame implements MouseListener{
                 {0, 0, 0},
 
         };
-        matrixWorker = new MatrixWorker(ticTacToeMatrix);
-
+        //matrixWorker = new MatrixWorker(ticTacToeMatrix);
+        Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+       // tablePanel.setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+        System.out.println(getClass());
+        System.out.println(getClass().getResource("test.jpg"));
         for(int i = 0; i<jLabels.length;i++){
             for(int j = 0; j<jLabels[0].length;j++){
-                jLabels[i][j] = new JLabel("1");
+                jLabels[i][j] = new JLabel();
                 jLabels[i][j].setOpaque(true);
                 jLabels[i][j].setName(i+""+j);
                 jLabels[i][j].addMouseListener(this);
                 jLabels[i][j].setBackground(emptyColor);
-
+                jLabels[i][j].setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+                //jLabels[i][j].getGraphics().drawLine(0,0,5,5);
+                //jLabels[i][j].setIcon(new ImageIcon(getClass().getResource("X_Icon.png")));
                 tablePanel.add(jLabels[i][j]);
             }
         }
 
-        /*
+
         JLabel jLabel1 = new JLabel("Teszt1");
+
+
+        /*
         jLabel1.setBackground(Color.RED);
         jLabel1.setOpaque(true);
 
@@ -115,27 +127,40 @@ public class GuiTable extends JFrame implements MouseListener{
 
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         new GuiTable();
     }
-
+*/
+    public Graphics2D testDraw(JLabel jLabel){
+        Graphics2D g = (Graphics2D) jLabel.getGraphics();
+        g.drawLine(0,0,10,10);
+        return  g;
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
         String row,column;
+        int flag = 0;
         //printArray(matrixWorker.getTicTacToeMatrix());
-        if(e.getComponent().getBackground() != testColor){
+        if(e.getComponent().getBackground() != Color.BLUE || e.getComponent().getBackground() != Color.RED){
 
             row = e.getComponent().getName().substring(0,1);
             column = e.getComponent().getName().substring(1,2);
-
+            if (flag == 0) {
+                e.getComponent().setBackground(Color.BLUE);
+                flag = 1;
+            } else {
+                e.getComponent().setBackground(Color.RED);
+                flag = 0;
+            }
             //System.out.println(e.getComponent().getName());
             e.getComponent().setBackground(testColor);
             //JLabel label = new JLabel(new ImageIcon("X_Icon.png"));
+            gameController.setMatrix1(Integer.parseInt(row)+1);
+            gameController.setMatrix2(Integer.parseInt(column)+1);
+            //matrixWorker.setPosition(Integer.parseInt(row)+1, Integer.parseInt(column)+1);
 
-            matrixWorker.setPosition(Integer.parseInt(row)+1, Integer.parseInt(column)+1);
-
-            matrixWorker.setCellValue(1);
-            printArray(matrixWorker.getTicTacToeMatrix());
+            //matrixWorker.setCellValue(1);
+           //printArray(matrixWorker.getTicTacToeMatrix());
 
         }
 
