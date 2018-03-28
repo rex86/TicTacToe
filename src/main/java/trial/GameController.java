@@ -2,11 +2,16 @@ package trial;
 
 import gui.GuiTable;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 public class GameController {
     static Counter counterPlayer1,counterPlayer2 = null;
     static int matrix1=1, matrix2=1;
+    static int flag = 0;
+    static final int NUMBEROFDOTCOUNT = 3;
+
 
     public void setMatrix1(int matrix1) {
         this.matrix1 = matrix1;
@@ -14,6 +19,15 @@ public class GameController {
 
     public void setMatrix2(int matrix2) {
         this.matrix2 = matrix2;
+    }
+    public void command(String command,JLabel panel){
+        String row,column;
+        switch (command){
+            case "click":
+            panel.setBackground(Color.yellow);
+
+                break;
+        }
     }
 
    public static void main(String[] args) {
@@ -40,7 +54,6 @@ public class GameController {
                 {0, 0, 0},
 
         };
-
         MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
         Player player1 = new Player("Rex", "X");
         Player player2 = new Player("Moni", "O");
@@ -51,12 +64,12 @@ public class GameController {
         int player2NumberInMatrix = player2.getPiece().equals("X")?1:2;
         Scanner sc = new Scanner(System.in);
         GuiTable guiTable = new GuiTable();
-
+        guiTable.setVisible(true);
         int flag = 0;
         boolean win = false;
         String winnerName = "";
-        System.out.println("MATRIX1: " + matrix1);
-        System.out.println("MATRIX2: " + matrix2);
+        //System.out.println("MATRIX1: " + matrix1);
+        //System.out.println("MATRIX2: " + matrix2);
 
         if (flag == 0) {
             System.out.print(player1.getName() + " row: column: ");
@@ -120,12 +133,13 @@ public class GameController {
         }
 */
     }
+
     static boolean isWin(Counter counter) {
 
-        return  counter.count("row") >= 3 ||
-                counter.count("column") >= 3 ||
-                counter.count("diagonalUp") >= 3 ||
-                counter.count("diagonalDown") >= 3;
+        return  counter.count("row") >= NUMBEROFDOTCOUNT ||
+                counter.count("column") >= NUMBEROFDOTCOUNT ||
+                counter.count("diagonalUp") >= NUMBEROFDOTCOUNT ||
+                counter.count("diagonalDown") >= NUMBEROFDOTCOUNT;
     }
 }
 

@@ -17,7 +17,7 @@ public class GuiTable extends JFrame implements MouseListener{
     final Color testColor = Color.RED;
     MatrixWorker matrixWorker;
     GameController gameController = new GameController();
-
+    int flag = 0;
     public GuiTable(){
         initGui();
     }
@@ -121,7 +121,7 @@ public class GuiTable extends JFrame implements MouseListener{
         cp.add(tablePanel);
 
         pack();
-        setVisible(true);
+        //setVisible(true);
 
 
 
@@ -139,9 +139,9 @@ public class GuiTable extends JFrame implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         String row,column;
-        int flag = 0;
+        gameController.command("click", (JLabel)e.getComponent());
         //printArray(matrixWorker.getTicTacToeMatrix());
-        if(e.getComponent().getBackground() != Color.BLUE || e.getComponent().getBackground() != Color.RED){
+        if(e.getComponent().getBackground() != Color.BLUE && e.getComponent().getBackground() != Color.RED){
 
             row = e.getComponent().getName().substring(0,1);
             column = e.getComponent().getName().substring(1,2);
@@ -153,7 +153,7 @@ public class GuiTable extends JFrame implements MouseListener{
                 flag = 0;
             }
             //System.out.println(e.getComponent().getName());
-            e.getComponent().setBackground(testColor);
+            //e.getComponent().setBackground(testColor);
             //JLabel label = new JLabel(new ImageIcon("X_Icon.png"));
             gameController.setMatrix1(Integer.parseInt(row)+1);
             gameController.setMatrix2(Integer.parseInt(column)+1);
