@@ -7,34 +7,96 @@ import java.awt.*;
 import java.util.Scanner;
 
 public class GameController {
-    static Counter counterPlayer1,counterPlayer2 = null;
-    static int matrix1=1, matrix2=1;
-    static int flag = 0;
-    static final int NUMBEROFDOTCOUNT = 3;
+    Counter counterPlayer1,counterPlayer2 = null;
+    int matrix1=1, matrix2=1;
+    int flag = 0;
+    final int NUMBEROFDOTCOUNT = 3;
+    int[][] ticTacToeMatrix = {
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
 
+    };
+    boolean win = false;
+    String winnerName = "";
+    MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
+    Player player1 = new Player("Rex", "X");
+    Player player2 = new Player("Moni", "O");
+    Table table = new Table(matrixWorker);
+    int player1NumberInMatrix = player1.getPiece().equals("X")?1:2;
+    int player2NumberInMatrix = player2.getPiece().equals("X")?1:2;
 
-    public void setMatrix1(int matrix1) {
-        this.matrix1 = matrix1;
+    GuiTable guiTable = new GuiTable(this);
+
+    public GameController() {
+
+        guiTable.setVisible(true);
+
     }
 
-    public void setMatrix2(int matrix2) {
-        this.matrix2 = matrix2;
-    }
     public void command(String command,JLabel panel){
-        String row,column;
+
         switch (command){
             case "click":
-            panel.setBackground(Color.yellow);
+                doCheckAndSet(panel);
 
                 break;
         }
     }
 
-   public static void main(String[] args) {
-        runGame();
+    private void doCheckAndSet(JLabel panel) {
+        String row,column;
+        counterPlayer1 = new Counter(matrixWorker, player1);
+        counterPlayer2 = new Counter(matrixWorker, player2);
+
+        if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
+
+            row = panel.getName().substring(0, 1);
+            column = panel.getName().substring(1, 2);
+
+            matrixWorker.setPosition(Integer.parseInt(row) + 1,Integer.parseInt(column) + 1);
+
+            if (flag == 0) {
+                panel.setBackground(Color.BLUE);
+                matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
+                flag = 1;
+            } else {
+                panel.setBackground(Color.RED);
+                matrixWorker.setCellValue(player2.getPiece().equals("X")?1:2);
+                flag = 0;
+            }
+
+            win = isWin(counterPlayer1) || isWin(counterPlayer2);
+            if(win && flag == 0){
+                winnerName = player2.getName();
+            }else if(win && flag == 1){
+                winnerName = player1.getName();
+            }
+            if(!winnerName.isEmpty()){
+                JOptionPane.showMessageDialog(guiTable,"Winner is: " + winnerName);
+                newGame();
+
+            }
+
+        //printArray(ticTacToeMatrix);
+        }
+
+    }
+    private void newGame(){
+        //Reset to default
+        matrixWorker.resetArray();
+        guiTable.resetTable();
+
+        win = false;
+        winnerName = "";
+        flag = 0;
     }
 
-    public static void runGame() {
+    public static void main(String[] args) {
+        new GameController();
+    }
+
+    public void runGame() {
         int[][] ticTacToeMatrixTest = {
                 {1, 1, 2},
                 {0, 1, 1},
@@ -48,24 +110,14 @@ public class GameController {
 
         };
 
-        int[][] ticTacToeMatrix = {
-                {0, 0, 0},
-                {0, 0, 0},
-                {0, 0, 0},
 
-        };
-        MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
-        Player player1 = new Player("Rex", "X");
-        Player player2 = new Player("Moni", "O");
-        counterPlayer1 = new Counter(matrixWorker, player1);
-        counterPlayer2 = new Counter(matrixWorker, player2);
-        Table table = new Table(matrixWorker);
-        int player1NumberInMatrix = player1.getPiece().equals("X")?1:2;
-        int player2NumberInMatrix = player2.getPiece().equals("X")?1:2;
-        Scanner sc = new Scanner(System.in);
-        GuiTable guiTable = new GuiTable();
-        guiTable.setVisible(true);
-        int flag = 0;
+
+
+
+
+
+
+  /*
         boolean win = false;
         String winnerName = "";
         //System.out.println("MATRIX1: " + matrix1);
@@ -85,12 +137,7 @@ public class GameController {
 
             flag = 0;
         }
-        win = isWin(counterPlayer1) || isWin(counterPlayer2);
-        if(win && flag == 0){
-            winnerName = player2.getName();
-        }else if(win && flag == 1){
-            winnerName = player1.getName();
-        }
+        */
         //#### CONSOLE GAME
         /*
         while (matrixWorker.freeCellNumber > 0 && !win) {
@@ -134,7 +181,18 @@ public class GameController {
 */
     }
 
-    static boolean isWin(Counter counter) {
+        public void printArray(int[][] arrayName){
+        int i,j;
+        for(i = 0 ; i<arrayName.length;i++){
+            for(j = 0 ; j<arrayName.length;j++){
+                System.out.print(arrayName[i][j]+", ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    boolean isWin(Counter counter) {
 
         return  counter.count("row") >= NUMBEROFDOTCOUNT ||
                 counter.count("column") >= NUMBEROFDOTCOUNT ||

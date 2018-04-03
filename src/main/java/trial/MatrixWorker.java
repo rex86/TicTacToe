@@ -148,6 +148,14 @@ public class MatrixWorker {
 
 
     }
+    public void resetArray(){
+        for (int i = 0; i < ticTacToeMatrix.length; i++) {
+            for (int j = 0; j < ticTacToeMatrix[0].length; j++) {
+                ticTacToeMatrix[i][j]=0;
+
+            }
+        }
+    }
 
     @Override
     public String toString() {
