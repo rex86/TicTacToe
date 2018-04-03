@@ -8,10 +8,9 @@ import java.util.Scanner;
 
 public class GameController {
     Counter counterPlayer1,counterPlayer2 = null;
-    int matrix1=1, matrix2=1;
     int flag = 0;
     final int NUMBEROFDOTCOUNT = 5;
-    final int TICTACTOEGAMETABLESIZE = 20;
+    final int TICTACTOEGAMETABLESIZE = 20; //you can change the table size between 3 and 1000
 
     int[][] ticTacToeMatrix = new int[TICTACTOEGAMETABLESIZE][TICTACTOEGAMETABLESIZE];
     boolean win = false;
