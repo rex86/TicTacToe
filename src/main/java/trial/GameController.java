@@ -4,13 +4,15 @@ import gui.GuiTable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class GameController {
     Counter counterPlayer1,counterPlayer2 = null;
     int flag = 0;
     final int NUMBEROFDOTCOUNT = 5;
-    final int TICTACTOEGAMETABLESIZE = 20; //you can change the table size between 3 and 1000
+    final int TICTACTOEGAMETABLESIZE = 30; //you can change the table size between 3 and 1000
 
     int[][] ticTacToeMatrix = new int[TICTACTOEGAMETABLESIZE][TICTACTOEGAMETABLESIZE];
     boolean win = false;
@@ -18,8 +20,9 @@ public class GameController {
     MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
     Player player1 = new Player("Rex", "X");
     Player player2 = new Player("Moni", "O");
-    Table table = new Table(matrixWorker);
-
+    //Table table = new Table(matrixWorker);
+    Dimension panelSize;
+    Graphics2D graphics2D;
     GuiTable guiTable = new GuiTable(this,TICTACTOEGAMETABLESIZE);
 
     public GameController() {
@@ -42,6 +45,12 @@ public class GameController {
         String [] stringArrayFromSplit;
         counterPlayer1 = new Counter(matrixWorker, player1);
         counterPlayer2 = new Counter(matrixWorker, player2);
+        graphics2D = (Graphics2D) panel.getGraphics();
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+
+        graphics2D.setStroke(new BasicStroke(2.5f));
+
+        panelSize = panel.getSize();
 
         if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
 
@@ -52,7 +61,8 @@ public class GameController {
             matrixWorker.setPosition(Integer.parseInt(row) + 1,Integer.parseInt(column) + 1);
 
             if (flag == 0) {
-                panel.setBackground(Color.BLUE);
+                graphics2D.setColor(Color.BLACK);
+                graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
                 matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
                 flag = 1;
             } else {
@@ -85,6 +95,8 @@ public class GameController {
         win = false;
         winnerName = "";
         flag = 0;
+
+
     }
 
     public static void main(String[] args) {

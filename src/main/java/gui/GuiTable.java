@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 public class GuiTable extends JFrame implements MouseListener{
 
     Container cp = getContentPane();
-    JLabel [][] jLabels = new JLabel[20][20];
+    JLabel [][] jLabels;
     final Color emptyColor = Color.WHITE;
     final Color testColor = Color.RED;
     GameController gameController;
@@ -29,6 +29,7 @@ public class GuiTable extends JFrame implements MouseListener{
 
     public GuiTable(GameController gameController, int ticTacToeTableSize){
         this.gameController = gameController;
+        jLabels = new JLabel[ticTacToeTableSize][ticTacToeTableSize];
         setTicTacToeTableSize(ticTacToeTableSize);
         initGui();
 
@@ -38,7 +39,7 @@ public class GuiTable extends JFrame implements MouseListener{
 
         setTitle("TicTacToeGame");
         setPreferredSize(new Dimension(1024,1024));
-        JPanel tablePanel = new JPanel(new GridLayout(20,20));
+        JPanel tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
 
         Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
