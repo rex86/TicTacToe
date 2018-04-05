@@ -16,6 +16,7 @@ public class GuiTable extends JFrame implements MouseListener{
     final Color testColor = Color.RED;
     GameController gameController;
     int ticTacToeTableSize;
+    JPanel tablePanel;
 
     public void setTicTacToeTableSize(int ticTacToeTableSize) {
         if(ticTacToeTableSize > 4 && ticTacToeTableSize < 1001){
@@ -39,7 +40,7 @@ public class GuiTable extends JFrame implements MouseListener{
 
         setTitle("TicTacToeGame");
         setPreferredSize(new Dimension(1024,1024));
-        JPanel tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
+        tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
 
         Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -73,6 +74,11 @@ public class GuiTable extends JFrame implements MouseListener{
 
             }
         }
+    }
+
+    public void clearGuiTableDraw(){
+        tablePanel.repaint();
+
     }
     @Override
     public void mouseClicked(MouseEvent e) {
