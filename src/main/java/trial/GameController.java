@@ -79,9 +79,9 @@ public class GameController {
             matrixWorker.setPosition(Integer.parseInt(row) + 1,Integer.parseInt(column) + 1);
 
             if (flag == 0) {
-                //graphics2D.setColor(Color.BLACK);
-                //graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
-                panel.setIcon(ii);
+                graphics2D.setColor(Color.BLACK);
+                graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
+               // panel.setIcon(ii);
                 matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
                 flag = 1;
             } else {
