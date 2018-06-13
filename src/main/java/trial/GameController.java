@@ -7,11 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+
+import static java.awt.image.ImageObserver.HEIGHT;
+import static java.awt.image.ImageObserver.WIDTH;
 
 public class GameController {
     Counter counterPlayer1,counterPlayer2 = null;
@@ -30,7 +34,7 @@ public class GameController {
     Graphics2D graphics2D;
     GuiTable guiTable = new GuiTable(this,TICTACTOEGAMETABLESIZE);
     InputStream stream;
-    String fileNameXIcon = "/X_Icon.png";
+    String fileNameXIcon = "/skydive.gif";
     ImageIcon icon;
     public GameController() {
 
@@ -73,8 +77,16 @@ public class GameController {
 
         URL urlImage = GameController.class.getResource(fileNameXIcon);
         ImageIcon x_Icon = new ImageIcon(urlImage);
+
+        ImageIcon icon = new ImageIcon(urlImage);
+        Image img = icon.getImage();
+        BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics g = bi.createGraphics();
+        g.drawImage(img, 0, 0, 10  , 10, null);
+        ImageIcon newIcon = new ImageIcon(bi);
+
         panel.setOpaque(true);
-        panel.setIcon(x_Icon);
+        panel.setIcon(newIcon);
         //if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
         if(panel.getBackground() == Color.WHITE) {
 
