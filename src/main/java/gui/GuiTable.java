@@ -72,7 +72,7 @@ public class GuiTable extends JFrame implements MouseListener{
     public void resetTable() {
         for (int i = 0; i < jLabels.length; i++) {
             for (int j = 0; j < jLabels[0].length; j++) {
-                jLabels[i][j].setBackground(emptyColor);
+                jLabels[i][j].setIcon(null);
 
             }
         }

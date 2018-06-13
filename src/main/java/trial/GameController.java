@@ -34,7 +34,8 @@ public class GameController {
     Graphics2D graphics2D;
     GuiTable guiTable = new GuiTable(this,TICTACTOEGAMETABLESIZE);
     InputStream stream;
-    String fileNameXIcon = "/skydive.gif";
+    String fileNameXIcon = "/X_Icon.gif";
+    String fileNameOIcon = "/O_Icon.gif";
     ImageIcon icon;
     public GameController() {
 
@@ -75,20 +76,30 @@ public class GameController {
         }
         //ImageIcon ii = new ImageIcon(getClass().getResource(fileNameXIcon));
 
-        URL urlImage = GameController.class.getResource(fileNameXIcon);
-        ImageIcon x_Icon = new ImageIcon(urlImage);
+        URL urlImageX = GameController.class.getResource(fileNameXIcon);
+        ImageIcon x_Icon = new ImageIcon(urlImageX);
 
-        ImageIcon icon = new ImageIcon(urlImage);
-        Image img = icon.getImage();
-        BufferedImage bi = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics g = bi.createGraphics();
-        g.drawImage(img, 0, 0, 10  , 10, null);
-        ImageIcon newIcon = new ImageIcon(bi);
+        URL urlImageO = GameController.class.getResource(fileNameOIcon);
+        ImageIcon o_Icon = new ImageIcon(urlImageO);
 
-        panel.setOpaque(true);
-        panel.setIcon(newIcon);
+        ImageIcon iconx = new ImageIcon(urlImageX);
+        Image imgx = iconx.getImage();
+        BufferedImage bix = new BufferedImage(imgx.getWidth(null), imgx.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics gx = bix.createGraphics();
+        gx.drawImage(imgx, 0, 9, 30, 30, null);
+        ImageIcon newIconx = new ImageIcon(bix);
+
+        //Resize O icon
+        ImageIcon icono = new ImageIcon(urlImageO);
+        Image imgo = icono.getImage();
+        BufferedImage bio = new BufferedImage(imgo.getWidth(null), imgo.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics go = bio.createGraphics();
+        go.drawImage(imgo, 0, 9, 30, 30, null);
+        ImageIcon newIcono = new ImageIcon(bio);
+        //check empty cell
+        isEmpty = panel.getIcon() == null?true:false;
         //if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
-        if(panel.getBackground() == Color.WHITE) {
+        if(isEmpty) {
 
             //because of xx,yyy,zzzz digits, for example: col 11, row 11...
             stringArrayFromSplit = panel.getName().split("-");
@@ -99,12 +110,13 @@ public class GameController {
                 //graphics2D.setColor(Color.BLACK);
                 //graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
                 //panel.setIcon(x_Icon);
+                panel.setIcon(newIcono);
                 matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
                 flag = 1;
             } else {
                 //panel.setBackground(Color.RED);
                // graphics2D.setColor(Color.RED);
-
+                panel.setIcon(newIconx);
                 //graphics2D.draw(new Line2D.Double(3,3,27,27));
                 //graphics2D.draw(new Line2D.Double(3,27,27,3));
 
