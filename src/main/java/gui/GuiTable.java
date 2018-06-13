@@ -38,8 +38,10 @@ public class GuiTable extends JFrame implements MouseListener{
 
     public void initGui(){
 
+
         setTitle("TicTacToeGame");
         setPreferredSize(new Dimension(1024,1024));
+        setResizable(false);
         tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
 
         Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);

@@ -9,6 +9,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class GameController {
     final int TICTACTOEGAMETABLESIZE = 30; //you can change the table size between 3 and 1000
 
     int[][] ticTacToeMatrix = new int[TICTACTOEGAMETABLESIZE][TICTACTOEGAMETABLESIZE];
-    boolean win = false;
+    boolean win = false, isEmpty;
     String winnerName = "";
     MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
     Player player1 = new Player("Rex", "X");
@@ -68,7 +69,12 @@ public class GameController {
         }catch (IOException ex){
             System.out.println(ex);
         }
-        ImageIcon ii = new ImageIcon(getClass().getResource(fileNameXIcon));
+        //ImageIcon ii = new ImageIcon(getClass().getResource(fileNameXIcon));
+
+        URL urlImage = GameController.class.getResource(fileNameXIcon);
+        ImageIcon x_Icon = new ImageIcon(urlImage);
+        panel.setOpaque(true);
+        panel.setIcon(x_Icon);
         //if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
         if(panel.getBackground() == Color.WHITE) {
 
@@ -77,19 +83,18 @@ public class GameController {
             row = stringArrayFromSplit[0];
             column = stringArrayFromSplit[1];
             matrixWorker.setPosition(Integer.parseInt(row) + 1,Integer.parseInt(column) + 1);
-
             if (flag == 0) {
-                graphics2D.setColor(Color.BLACK);
-                graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
-               // panel.setIcon(ii);
+                //graphics2D.setColor(Color.BLACK);
+                //graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
+                //panel.setIcon(x_Icon);
                 matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
                 flag = 1;
             } else {
                 //panel.setBackground(Color.RED);
-                graphics2D.setColor(Color.RED);
+               // graphics2D.setColor(Color.RED);
 
-                graphics2D.draw(new Line2D.Double(3,3,27,27));
-                graphics2D.draw(new Line2D.Double(3,27,27,3));
+                //graphics2D.draw(new Line2D.Double(3,3,27,27));
+                //graphics2D.draw(new Line2D.Double(3,27,27,3));
 
                 matrixWorker.setCellValue(player2.getPiece().equals("X")?1:2);
                 flag = 0;
@@ -106,7 +111,6 @@ public class GameController {
                 newGame();
 
             }
-
         //printArray(ticTacToeMatrix);
         }
 
