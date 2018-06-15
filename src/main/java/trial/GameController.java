@@ -81,6 +81,7 @@ public class GameController {
 
         URL urlImageO = GameController.class.getResource(fileNameOIcon);
         ImageIcon o_Icon = new ImageIcon(urlImageO);
+        //Resize X icon
 
         ImageIcon iconx = new ImageIcon(urlImageX);
         Image imgx = iconx.getImage();
@@ -143,7 +144,7 @@ public class GameController {
         //Reset to default
         matrixWorker.resetArray();
         guiTable.resetTable();
-        guiTable.clearGuiTableDraw();
+        //guiTable.clearGuiTableDraw();
 
         win = false;
         winnerName = "";
