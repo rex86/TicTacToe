@@ -81,8 +81,8 @@ public class GameController {
 
         URL urlImageO = GameController.class.getResource(fileNameOIcon);
         ImageIcon o_Icon = new ImageIcon(urlImageO);
-        //Resize X icon
 
+        //Resize X icon
         ImageIcon iconx = new ImageIcon(urlImageX);
         Image imgx = iconx.getImage();
         BufferedImage bix = new BufferedImage(imgx.getWidth(null), imgx.getHeight(null), BufferedImage.TYPE_INT_ARGB);

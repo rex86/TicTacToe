@@ -17,6 +17,8 @@ public class GuiTable extends JFrame implements MouseListener{
     GameController gameController;
     int ticTacToeTableSize;
     JPanel tablePanel, namePanel;
+    AddPlayerPanel addPlayerPanel = new AddPlayerPanel();
+    ResultPanel resultPanel = new ResultPanel();
 
     public void setTicTacToeTableSize(int ticTacToeTableSize) {
         if(ticTacToeTableSize > 4 && ticTacToeTableSize < 1001){
@@ -40,7 +42,7 @@ public class GuiTable extends JFrame implements MouseListener{
 
 
         setTitle("TicTacToeGame");
-        setPreferredSize(new Dimension(1024,1024));
+        setPreferredSize(new Dimension(1200,1024));
         setResizable(false);
         tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
 
@@ -65,18 +67,22 @@ public class GuiTable extends JFrame implements MouseListener{
 
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+
+        /*setLayout(new BorderLayout());
         namePanel = new JPanel(new FlowLayout());
         //namePanel.setPreferredSize(new Dimension(200,100));
         JLabel labelName = new JLabel("Név: ",SwingConstants.LEFT);
         JTextField tfName = new JTextField(10);
-        //namePanel.add(labelName);
+        namePanel.add(labelName);
         namePanel.add(tfName);
-
-        cp.add(tablePanel, BorderLayout.SOUTH);
-        //cp.add(namePanel, BorderLayout.NORTH);
+*/
+        cp.add(addPlayerPanel,BorderLayout.EAST);
+        cp.add(resultPanel);
+        cp.add(tablePanel);
+        //cp.add(namePanel, BorderLayout.EAST);
 
         pack();
+
     }
 
     public void resetTable() {
