@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class AddPlayerPanel extends JPanel{
 
@@ -29,5 +30,22 @@ public class AddPlayerPanel extends JPanel{
         add(btOk);
 
 
+
+    }
+
+    public String getPlayer1() {
+        return jtp1.getText();
+    }
+
+    public void setPlayer1(String player1) {
+        this.jtp1.setText(player1);
+    }
+
+    public String getPlayer2() {
+        return jtp2.getText();
+    }
+
+    public void setPlayer2(String player2) {
+        this.jtp2.setText(player2);
     }
 }

@@ -5,10 +5,12 @@ import trial.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GuiTable extends JFrame implements MouseListener{
+public class GuiTable extends JFrame implements MouseListener, ActionListener{
 
     Container cp = getContentPane();
     JLabel [][] jLabels;
@@ -45,6 +47,7 @@ public class GuiTable extends JFrame implements MouseListener{
         setPreferredSize(new Dimension(1200,1024));
         setResizable(false);
         tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
+
 
         Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -120,6 +123,11 @@ public class GuiTable extends JFrame implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }
