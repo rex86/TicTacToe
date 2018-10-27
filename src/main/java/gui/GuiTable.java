@@ -5,12 +5,10 @@ import trial.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GuiTable extends JFrame implements MouseListener, ActionListener{
+public class GuiTable extends JFrame implements MouseListener{
 
     Container cp = getContentPane();
     JLabel [][] jLabels;
@@ -48,7 +46,6 @@ public class GuiTable extends JFrame implements MouseListener, ActionListener{
         setResizable(false);
         tablePanel = new JPanel(new GridLayout(ticTacToeTableSize,ticTacToeTableSize));
 
-
         Border paddingBorder = BorderFactory.createEmptyBorder(0,0,0,0);
         Border border = BorderFactory.createLineBorder(Color.BLACK);
 
@@ -60,29 +57,16 @@ public class GuiTable extends JFrame implements MouseListener, ActionListener{
                 jLabels[i][j].addMouseListener(this);
                 jLabels[i][j].setBackground(emptyColor);
                 jLabels[i][j].setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
-                //jLabels[i][j].getGraphics().drawLine(0,0,5,5);
-                //jLabels[i][j].setIcon(new ImageIcon(getClass().getResource("X_Icon.png")));
                 tablePanel.add(jLabels[i][j]);
             }
         }
 
 
-
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        /*setLayout(new BorderLayout());
-        namePanel = new JPanel(new FlowLayout());
-        //namePanel.setPreferredSize(new Dimension(200,100));
-        JLabel labelName = new JLabel("Név: ",SwingConstants.LEFT);
-        JTextField tfName = new JTextField(10);
-        namePanel.add(labelName);
-        namePanel.add(tfName);
-*/
         cp.add(addPlayerPanel,BorderLayout.EAST);
         cp.add(resultPanel);
         cp.add(tablePanel);
-        //cp.add(namePanel, BorderLayout.EAST);
 
         pack();
 
@@ -97,13 +81,9 @@ public class GuiTable extends JFrame implements MouseListener, ActionListener{
         }
     }
 
-    public void clearGuiTableDraw(){
-        tablePanel.repaint();
-
-    }
     @Override
     public void mouseClicked(MouseEvent e) {
-        gameController.command("click", (JLabel)e.getComponent());
+        gameController.command("click", e.getComponent());
         }
 
     @Override
@@ -123,11 +103,6 @@ public class GuiTable extends JFrame implements MouseListener, ActionListener{
 
     @Override
     public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
     }
 }

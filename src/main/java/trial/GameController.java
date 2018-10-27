@@ -1,10 +1,13 @@
 package trial;
 
+import gui.AddPlayerPanel;
 import gui.GuiTable;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
@@ -17,7 +20,7 @@ import java.util.Scanner;
 import static java.awt.image.ImageObserver.HEIGHT;
 import static java.awt.image.ImageObserver.WIDTH;
 
-public class GameController {
+public class GameController{
     Counter counterPlayer1,counterPlayer2 = null;
     int flag = 0;
     final int NUMBEROFDOTCOUNT = 5;
@@ -27,9 +30,9 @@ public class GameController {
     boolean win = false, isEmpty;
     String winnerName = "";
     MatrixWorker matrixWorker = new MatrixWorker(ticTacToeMatrix);
-    Player player1 = new Player("Rex", "X");
-    Player player2 = new Player("Moni", "O");
-    //Table table = new Table(matrixWorker);
+    static Player player1 = new Player("Rex", "X");
+    static Player player2 = new Player("Moni", "O");
+
     Dimension panelSize;
     Graphics2D graphics2D;
     GuiTable guiTable = new GuiTable(this,TICTACTOEGAMETABLESIZE);
@@ -37,17 +40,18 @@ public class GameController {
     String fileNameXIcon = "/X_Icon.gif";
     String fileNameOIcon = "/O_Icon.gif";
     ImageIcon icon;
-    public GameController() {
+    AddPlayerPanel playerPanel = new AddPlayerPanel();
 
+    public GameController() {
         guiTable.setVisible(true);
 
     }
 
-    public void command(String command,JLabel panel){
+    public void command(String command,Object object){
 
         switch (command){
             case "click":
-                doCheckAndSet(panel);
+                doCheckAndSet((JLabel) object);
                 break;
         }
     }
@@ -64,9 +68,6 @@ public class GameController {
 
         panelSize = panel.getSize();
 
-        //InputStream file = ClassLoader.class.getResourceAsStream(fileName);
-
-
         stream = getClass().getResourceAsStream(fileNameXIcon);
         try {
             icon = new ImageIcon(ImageIO.read(stream));
@@ -74,7 +75,6 @@ public class GameController {
         }catch (IOException ex){
             System.out.println(ex);
         }
-        //ImageIcon ii = new ImageIcon(getClass().getResource(fileNameXIcon));
 
         URL urlImageX = GameController.class.getResource(fileNameXIcon);
         ImageIcon x_Icon = new ImageIcon(urlImageX);
@@ -97,9 +97,8 @@ public class GameController {
         Graphics go = bio.createGraphics();
         go.drawImage(imgo, 0, 9, 30, 30, null);
         ImageIcon newIcono = new ImageIcon(bio);
-        //check empty cell
         isEmpty = panel.getIcon() == null?true:false;
-        //if(panel.getBackground() != Color.BLUE && panel.getBackground() != Color.RED) {
+
         if(isEmpty) {
 
             //because of xx,yyy,zzzz digits, for example: col 11, row 11...
@@ -108,21 +107,15 @@ public class GameController {
             column = stringArrayFromSplit[1];
             matrixWorker.setPosition(Integer.parseInt(row) + 1,Integer.parseInt(column) + 1);
             if (flag == 0) {
-                //graphics2D.setColor(Color.BLACK);
-                //graphics2D.draw(new Ellipse2D.Double(3,3,panelSize.getWidth()-7,panelSize.getHeight()-7));
-                //panel.setIcon(x_Icon);
                 panel.setIcon(newIcono);
                 matrixWorker.setCellValue(player1.getPiece().equals("X")?1:2);
                 flag = 1;
-            } else {
-                //panel.setBackground(Color.RED);
-               // graphics2D.setColor(Color.RED);
-                panel.setIcon(newIconx);
-                //graphics2D.draw(new Line2D.Double(3,3,27,27));
-                //graphics2D.draw(new Line2D.Double(3,27,27,3));
 
+            } else {
+                panel.setIcon(newIconx);
                 matrixWorker.setCellValue(player2.getPiece().equals("X")?1:2);
                 flag = 0;
+
             }
 
             win = isWin(counterPlayer1) || isWin(counterPlayer2);
@@ -136,10 +129,14 @@ public class GameController {
                 newGame();
 
             }
-        //printArray(ticTacToeMatrix);
         }
 
     }
+    public static Player getPlayer1() {
+        return player1;
+    }
+
+    public static Player getPlayer2() { return player2; }
     private void newGame(){
         //Reset to default
         matrixWorker.resetArray();
@@ -153,8 +150,18 @@ public class GameController {
 
     }
 
+    public static void setPlayer1(String player1Name) {
+        player1.setName(player1Name);
+    }
+
+    public static void setPlayer2(String player1Name) {
+        player2.setName(player1Name);
+    }
+
     public static void main(String[] args) {
+
         new GameController();
+
     }
 
 
@@ -176,6 +183,7 @@ public class GameController {
                 counter.count("diagonalUp") >= NUMBEROFDOTCOUNT ||
                 counter.count("diagonalDown") >= NUMBEROFDOTCOUNT;
     }
+
 }
 
 

@@ -11,6 +11,11 @@ public class Player {
     public String getPiece() {
         return piece;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
